@@ -8,7 +8,6 @@ def saveImg(result):
     for imgURL in result:
         # 儲存圖片
         try:
-            # ^ 開頭要包含什麼（imageURL）()：對括弧內的字元形成群組？
             urllib.request.urlretrieve(imgURL, 'image/' + os.path.basename(imgURL))
         except:
             print("error on "+ imgURL)
@@ -29,6 +28,7 @@ def main():
         # 取得筆記的所有圖片網址
         content = api.get_note(noteID)["content"]
         for url in imageURL:
+            # ^ 開頭要包含什麼（imageURL）()：對括弧內的字元形成群組？
             result = re.findall(url+"/[^\ (\n)]*", content)
             saveImg(result)
         # 紀錄目前已經備份了幾個共筆
