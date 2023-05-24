@@ -14,7 +14,11 @@ def saveImg(result):
 
 def main():
     global api
-    token = "26T3TUGVZ1GZO9I9JAQ8QRNKAF2XG8GGEHFOPGYVA7YJ07NT7N"
+    # read HackMD API
+    f = open("myAPI.txt","r")
+    token = f.read()
+    print(token)
+    f.close()
     api = API(token)
     # get all notes in token
     data = api.get_note_list()
