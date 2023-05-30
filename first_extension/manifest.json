@@ -1,18 +1,27 @@
 {
-  "manifest_version": 2,
-
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
+  "manifest_version": 3,
   "version": "1.0",
-
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html",
-    "default_title": "Click here!"
+  "name": "Hello Shaila",
+  "description": "A plain text description",
+  "icons": {  
+    "16": "icon.png" 
+  },
+  "background":{
+    "service_worker": "background.js"
   },
   "permissions": [
-    "activeTab",
-    "storage",
-    "https://ajax.googleapis.com/"
-  ]
+    "storage", 
+    "activeTab", 
+    "tabs", 
+    "cookies"
+  ],
+  "action": {
+    "default_popup": "/popup.html",
+    "default_title": "IT_HELP 2022 DEMO WITH WINNIE",
+    "default_icon": {
+      "16": "icon.png",
+      "24": "icon.png",
+      "32": "icon.png"
+    }
+  }
 }
