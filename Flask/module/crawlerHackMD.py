@@ -7,13 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
 
-def writeResult(result, filePath):
-    f = open(filePath, 'w', encoding='utf-8-sig')
-    for a in range(len(result)):
-        f.write(str(result[a]) + '\n')
-    f.close()
-
-
 def crawlerHackMD(url, driverPath):
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -54,12 +47,4 @@ def crawlerHackMD(url, driverPath):
     time.sleep(3)
     driver.quit()
 
-def main():
-    url = 'https://hackmd.io/MJTx2bKjTMuF3_pxQh8HbQ?view'
-    chromeDriverPath = 'chromedriver.exe'
-    crawlerResultPath = 'test.txt'
-    crawlerResult = crawlerHackMD(url, chromeDriverPath)
-    writeResult(crawlerResult, crawlerResultPath)
-
-
-main()
+crawlerHackMD("https://hackmd.io/MJTx2bKjTMuF3_pxQh8HbQ?view", "../chromedriver.exe")
