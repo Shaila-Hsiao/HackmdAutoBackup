@@ -47,4 +47,3 @@ def crawlerHackMD(url, driverPath):
     time.sleep(3)
     driver.quit()
 
-crawlerHackMD("https://hackmd.io/MJTx2bKjTMuF3_pxQh8HbQ?view", "../chromedriver.exe")
