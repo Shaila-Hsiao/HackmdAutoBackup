@@ -7,16 +7,19 @@
     "16": "icon.png" 
   },
   "background":{
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": [
     "storage", 
     "activeTab", 
     "tabs", 
-    "cookies"
+    "cookies",
+    "notifications",
+    "http://localhost:5000"
   ],
   "action": {
-    "default_popup": "/popup.html",
+    "default_popup": "/popup/popup.html",
     "default_title": "IT_HELP 2022 DEMO WITH WINNIE",
     "default_icon": {
       "16": "icon.png",
