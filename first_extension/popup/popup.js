@@ -1,3 +1,7 @@
+$( async () => {
+    const results = await $.get("http://shaila.org/wp-content/uploads/?_embed")
+    console.log(results)
+});
 $("#YesBtn").on("click", function(event) { 
     console.log("Click!!!!");
     const API_data = document.getElementById("API_input").value;
