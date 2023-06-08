@@ -6,6 +6,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
+import requests
+from bs4 import BeautifulSoup
+
+def getContent(url):
+    res = requests.get(url).text
+    res_soup = BeautifulSoup(res, 'html.parser')
+    return res_soup
 
 def crawlerHackMD(url, driverPath):
     options = webdriver.ChromeOptions()
