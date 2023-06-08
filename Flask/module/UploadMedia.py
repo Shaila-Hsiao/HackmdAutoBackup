@@ -6,7 +6,7 @@ from os.path import join
 import json
 
 # 上傳照片
-async def  UploadImage(savePath):
+def  UploadImage(savePath):
   # Login
   with open('account.json', 'r', encoding='utf-8') as f:
       account = json.load(f)
@@ -49,7 +49,7 @@ async def  UploadImage(savePath):
     with open(filename, 'rb') as img:
             data['bits'] = xmlrpc_client.Binary(img.read())
 
-    response = await client.call(media.UploadFile(data))
+    response = client.call(media.UploadFile(data))
     # response == {
     #       'id': 6,
     #       'file': 'picture.jpg'
