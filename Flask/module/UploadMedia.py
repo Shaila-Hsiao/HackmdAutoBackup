@@ -48,8 +48,10 @@ def  UploadImage(savePath):
     # read the binary file and let the XMLRPC library encode it into base64
     with open(filename, 'rb') as img:
             data['bits'] = xmlrpc_client.Binary(img.read())
-
-    response = client.call(media.UploadFile(data))
+    try:
+      response = client.call(media.UploadFile(data))
+    except:
+       print("error")
     # response == {
     #       'id': 6,
     #       'file': 'picture.jpg'
