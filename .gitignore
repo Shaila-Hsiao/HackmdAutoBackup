@@ -5,3 +5,4 @@ image/*
 # Flask
 Flask/module/__pycache__
 Flask/static/image
+Flask/__pycache__/*

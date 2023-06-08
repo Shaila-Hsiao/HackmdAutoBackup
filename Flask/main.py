@@ -8,7 +8,11 @@ from module.crawlerHackMD import crawlerHackMD,getContent
 from module.imageDeal import saveImage,getImageURL
 app = Flask(__name__)
 CORS(app)
-
+# 創建資料夾儲存圖片
+if os.path.exists('./static') == False:
+    os.makedirs('./static')
+if os.path.exists('./static/image') == False:
+    os.makedirs('./static/image')
 
 @app.route('/')
 # def index():
@@ -36,19 +40,13 @@ def SendAPI():
         html = res_soup.prettify()
         # 取得共筆內容的所有圖片網址
         imageURLs = getImageURL(html)
+        
         # 將圖片儲存到 ./static/image (注意：最後一定要加個斜線)
         savePath = "./static/image/"
         saveImage(imageURLs,savePath)
-        # FIXME: test: record the prcoess
         num += 1
         print('\r' + str(num) + '/' + str(len(urls)), end='')
     results = {'status': API_data}
     return jsonify(results)
-
 if __name__ == "__main__":
-    # 創建資料夾儲存圖片
-    if os.path.exists('./static') == False:
-        os.makedirs('./static')
-    if os.path.exists('./static/image') == False:
-        os.makedirs('./static/image')
     app.run(debug=True)
