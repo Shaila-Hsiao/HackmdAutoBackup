@@ -50,6 +50,7 @@ def  UploadImage(savePath):
             data['bits'] = xmlrpc_client.Binary(img.read())
     try:
       response = client.call(media.UploadFile(data))
+      wp_img_url.append(response['url'])
     except:
        print("error")
     # response == {
@@ -60,7 +61,6 @@ def  UploadImage(savePath):
     # }
     # response type : dict
     # 印出 url
-    wp_img_url.append(response['url'])
     attachment_id = response['id']
   print("url",response['url'])
   return wp_img_url
