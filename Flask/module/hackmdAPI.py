@@ -9,6 +9,7 @@ def get_hackmd_urls(token):
     data = data[:3]
     # get url of notes
     urls = []
+    '''
     for i in range(len(data)):
         noteURL = {data[i]['publishLink']}
         urls.append(noteURL)
@@ -17,5 +18,4 @@ def get_hackmd_urls(token):
     for i in range(len(data)):
         noteURL = f"https://hackmd.io/{data[i]['id']}?view"
         urls.append(noteURL)
-    '''
     return urls
