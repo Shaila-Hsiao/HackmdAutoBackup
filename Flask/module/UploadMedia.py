@@ -23,6 +23,7 @@ def  UploadImage(savePath):
   ImgPath = []
   # 照片名稱list
   ImgName = []
+  wp_img_name = []
   wp_img_url = []
   # 存入照片路徑與名稱
   for root, dirs, files in walk(savePath):
@@ -50,6 +51,7 @@ def  UploadImage(savePath):
             data['bits'] = xmlrpc_client.Binary(img.read())
     try:
       response = client.call(media.UploadFile(data))
+      wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
     except:
        print("error")
@@ -63,5 +65,5 @@ def  UploadImage(savePath):
     # 印出 url
     attachment_id = response['id']
   print("url",response['url'])
-  return wp_img_url
+  return wp_img_name,wp_img_url
 
