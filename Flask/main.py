@@ -19,7 +19,7 @@ if os.path.exists('./static/image') == False:
 # def index():
 #   return render_template('index.html')
 @app.route('/SendAPI', methods=['POST'])
-def SendAPI():
+async def SendAPI():
     API_data = request.get_json()
     print(API_data) 
     # get hackmqd urls
@@ -49,7 +49,7 @@ def SendAPI():
         num += 1
         print('\r' + str(num) + '/' + str(len(urls)), end='')
     # 上傳照片，取得照片在 wordpress 的 URL
-    wp_img_url = UploadImage(savePath)
+    wp_img_url = await UploadImage(savePath)
     print("wp_img_url : ",wp_img_url)
     results = {'status': API_data}
     return jsonify(results)
