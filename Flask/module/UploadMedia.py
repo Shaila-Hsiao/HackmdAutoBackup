@@ -5,9 +5,7 @@ from os import walk
 from os.path import join
 import json
 
-# Importing library
-from bs4 import BeautifulSoup
-import re
+
 
 # Login
 with open('account.json', 'r', encoding='utf-8') as f:
