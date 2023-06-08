@@ -6,6 +6,7 @@ import os
 from module.hackmdAPI import get_hackmd_urls
 from module.crawlerHackMD import crawlerHackMD,getContent
 from module.imageDeal import saveImage,getImageURL
+from module.UploadMedia import UploadImage
 app = Flask(__name__)
 CORS(app)
 # 創建資料夾儲存圖片
@@ -25,6 +26,7 @@ def SendAPI():
     urls = get_hackmd_urls(API_data)
     # FIXME: 測試用：已經完成了多少共筆的圖片備份
     num = 0
+    wp_img_url = []
     for note_url in urls:
         '''
         # windows 驅動程式 ， ubuntu 可能還要看一下怎麼啟動，因為解壓縮後不是執行檔
@@ -46,6 +48,9 @@ def SendAPI():
         saveImage(imageURLs,savePath)
         num += 1
         print('\r' + str(num) + '/' + str(len(urls)), end='')
+    # 上傳照片，取得照片在 wordpress 的 URL
+    wp_img_url = UploadImage(savePath)
+    print("wp_img_url : ",wp_img_url)
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":
