@@ -39,6 +39,7 @@ def SendAPI():
         # 將圖片儲存到 ./static/image (注意：最後一定要加個斜線)
         savePath = "./static/image/"
         saveImage(imageURLs,savePath)
+        # FIXME: test: record the prcoess
         num += 1
         print('\r' + str(num) + '/' + str(len(urls)), end='')
     results = {'status': API_data}
