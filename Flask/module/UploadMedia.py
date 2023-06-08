@@ -58,8 +58,8 @@ def UploadImage(savePath):
     # }
     # response type : dict
     # 印出 url
-    attachment_id = response['id']
     wp_img_url.append(response['url'])
-    print("url",response['url'])
-    return wp_img_url
+    attachment_id = response['id']
+  print("url",response['url'])
+  return wp_img_url
 
