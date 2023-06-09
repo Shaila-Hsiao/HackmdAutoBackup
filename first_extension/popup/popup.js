@@ -1,5 +1,5 @@
 $( async () => {
-    const results = await $.get("http://shaila.org/wp-content/uploads/?_embed")
+    const results = await $.get("http://shaila.org/wp-content/uploads/2023/06/uStx8CK.jpg")
     console.log(results)
 });
 $("#YesBtn").on("click", function(event) { 

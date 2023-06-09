@@ -16,7 +16,8 @@
     "tabs", 
     "cookies",
     "notifications",
-    "http://localhost:5000/*"
+    "http://localhost:5000/*",
+    "http://shaila.org/*"
   ],
   "action": {
     "default_popup": "/popup/popup.html",
