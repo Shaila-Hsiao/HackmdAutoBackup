@@ -19,5 +19,5 @@ $("#YesBtn").on("click", function(event) {
 });
 $("#NoBtn").on("click", function(event) { 
     console.log("NOClick!!!!");
-    
+    window.close();
 });
