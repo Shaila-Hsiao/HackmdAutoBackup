@@ -53,6 +53,7 @@ def  UploadImage(savePath):
       response = client.call(media.UploadFile(data))
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
+      print("url",response['url'])
     except:
        print("error")
     # response == {
@@ -64,6 +65,5 @@ def  UploadImage(savePath):
     # response type : dict
     # 印出 url
     attachment_id = response['id']
-  print("url",response['url'])
   return wp_img_name,wp_img_url
 
