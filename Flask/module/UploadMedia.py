@@ -14,7 +14,7 @@ def  UploadImage(savePath):
   id = account['user']
   password = account['password']
 
-  url = 'http://shaila.org/xmlrpc.php'
+  url = 'http://orz.com/xmlrpc.php'
 
   which = 'publish'
 
@@ -51,6 +51,8 @@ def  UploadImage(savePath):
             data['bits'] = xmlrpc_client.Binary(img.read())
     try:
       response = client.call(media.UploadFile(data))
+      # 印出 url
+      print("url",response['url'])
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
     except:
@@ -62,8 +64,6 @@ def  UploadImage(savePath):
     #       'type': 'image/jpeg',
     # }
     # response type : dict
-    # 印出 url
     attachment_id = response['id']
-  print("url",response['url'])
   return wp_img_name,wp_img_url
 

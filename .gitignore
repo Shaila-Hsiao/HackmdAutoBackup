@@ -1,8 +1,12 @@
 # 自己的 HackMD API
 myAPI.txt
+test.html
 image/*
 
 # Flask
 Flask/module/__pycache__
 Flask/static/image
 Flask/__pycache__/*
+Flask/account.json
+Flask/test.txt
+Flask/test_markdown.txt

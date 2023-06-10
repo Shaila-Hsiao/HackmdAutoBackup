@@ -28,16 +28,25 @@ def get_hackmd_urls(token):
     # get all notes in token
     data = api.get_note_list()
     # FIXME: test
-    data = data[:3]
+    data = data[:1]
     # get url of notes
     urls = []
+    note_id_list = []
     for i in range(len(data)):
         noteURL = data[i]['publishLink']
+        node_id = data[i]["id"]
         urls.append(noteURL)
+        note_id_list.append(node_id)
     '''
     get view mode urls
     for i in range(len(data)):
         noteURL = f"https://hackmd.io/{data[i]['id']}?view"
         urls.append(noteURL)
     '''
-    return urls
+    return urls,note_id_list
+# use HackMD API for getting content of note
+def get_hackmd_content(token,note_id):
+    api = API(token)
+    data = api.get_note(note_id)
+    return data["content"]
+

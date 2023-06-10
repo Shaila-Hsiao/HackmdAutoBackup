@@ -3,7 +3,7 @@ from flask_cors import CORS
 import os
 
 # module
-from module.hackmdAPI import get_hackmd_urls, replaceRule, update
+from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
 from module.crawlerHackMD import crawlerHackMD, getContent
 from module.imageDeal import saveImage, getImageURL
 from module.UploadMedia import UploadImage
@@ -23,10 +23,10 @@ def SendAPI():
     API_data = request.get_json()
     print(API_data) 
     # get hackmqd urls
-    urls = get_hackmd_urls(API_data)
+    urls, note_id_list = get_hackmd_urls(API_data)
     # FIXME: 測試用：已經完成了多少共筆的圖片備份
     num = 0
-    for note_url in urls:
+    for i in range(len(urls)):
         wp_img_name, wp_img_url = [],[] 
         # 共筆內圖片的前綴網址
         hackmd_prefix = ["https://hackmd.io/_uploads/","https://i.imgur.com/"]
@@ -37,13 +37,24 @@ def SendAPI():
         crawlerHackMD(url, chromeDriverPath)
         '''
         # 取得共筆網頁內容
-        res_soup = getContent(note_url)
+        res_soup = getContent(urls[i])
         # FIXME: 測試用： 查看共筆標題
-        print("note url =",note_url)
+        print("note url =",urls[i])
         print("title =",res_soup.head.title)
-        # get markdown content html
-        html = res_soup.find("div",class_="container-fluid markdown-body")
-        markdown = html.get_text()
+        # user's notes is public
+        try:
+            # get markdown content html
+            html = res_soup.find("div",class_="container-fluid markdown-body")
+            markdown = html.get_text()
+            f = open("test.txt","w")
+            f.write(html)
+            f.close
+            print("===>",type(markdown))
+        # if the user's notes is forbidden
+        except:
+            # use HackMD API
+            markdown = get_hackmd_content(API_data,note_id_list[i])
+            print("===>",type(markdown))
         # 取得共筆內容的所有圖片網址
         imageURLs = getImageURL(hackmd_prefix,markdown)
         # 將圖片儲存到 ./static/image (注意：最後一定要加個斜線)
@@ -57,7 +68,7 @@ def SendAPI():
         # HackMD 圖片網址換成 wordpress 網址
         content = replaceRule(markdown,hackmd_prefix,wp_img_name,wp_img_url)
         # 更新內容到 HackMD
-        update(content)
+        update(API_data,content,note_id_list[i])
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":
