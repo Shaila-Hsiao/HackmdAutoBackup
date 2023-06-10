@@ -20,8 +20,12 @@ if os.path.exists('./static/image') == False:
 #   return render_template('index.html')
 @app.route('/SendAPI', methods=['POST'])
 def SendAPI():
-    API_data = request.get_json()
-    print(API_data) 
+    API_data = request.json['API_data']
+    # Wordpress account、password、url
+    account = request.json['account']
+    wp_password = request.json['wp_password']
+    wp_url = request.json['wp_url']
+    print(API_data,account,wp_url,wp_password) 
     # get hackmqd urls
     urls, note_id_list = get_hackmd_urls(API_data)
     # FIXME: 測試用：已經完成了多少共筆的圖片備份
