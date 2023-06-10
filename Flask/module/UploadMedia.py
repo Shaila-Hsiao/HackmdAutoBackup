@@ -56,6 +56,7 @@ def  UploadImage(savePath):
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
       print("url",response['url'])
+      attachment_id = response['id']
     except:
        print("error")
     # response == {
@@ -65,6 +66,5 @@ def  UploadImage(savePath):
     #       'type': 'image/jpeg',
     # }
     # response type : dict
-    attachment_id = response['id']
   return wp_img_name,wp_img_url
 
