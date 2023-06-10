@@ -55,6 +55,7 @@ def  UploadImage(savePath):
       print("url",response['url'])
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
+      print("url",response['url'])
     except:
        print("error")
     # response == {
