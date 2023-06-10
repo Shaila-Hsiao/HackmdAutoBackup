@@ -67,7 +67,7 @@ def SendAPI():
         num += 1
         print('\r' + str(num) + '/' + str(len(urls)), end='')
         # 上傳照片，取得照片在 wordpress 的 URL
-        wp_img_name, wp_img_url = UploadImage(savePath)
+        wp_img_name, wp_img_url = UploadImage(account,wp_password,wp_url,savePath)
         print("wp_img_url : ",wp_img_url)
         # HackMD 圖片網址換成 wordpress 網址
         content = replaceRule(markdown,hackmd_prefix,wp_img_name,wp_img_url)

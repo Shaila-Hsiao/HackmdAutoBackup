@@ -6,15 +6,15 @@ from os.path import join
 import json
 
 # 上傳照片
-def  UploadImage(savePath):
+def UploadImage(account,wp_password,wp_url,savePath):
   # Login
-  with open('account.json', 'r', encoding='utf-8') as f:
-      account = json.load(f)
+  # with open('account.json', 'r', encoding='utf-8') as f:
+  #     account = json.load(f)
   # 登入帳號、密碼
-  id = account['user']
-  password = account['password']
-
-  url = 'http://orz.com/xmlrpc.php'
+  id = account
+  password = wp_password
+  # wp_url : 
+  url = 'http://'+wp_url+'/xmlrpc.php'
 
   which = 'publish'
 
