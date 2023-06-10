@@ -16,8 +16,7 @@
     "tabs", 
     "cookies",
     "notifications",
-    "http://localhost:5000/*",
-    "http://shaila.org/*"
+    "http://localhost:5000/*"
   ],
   "action": {
     "default_popup": "/popup/popup.html",
@@ -27,9 +26,5 @@
       "24": "icon.png",
       "32": "icon.png"
     }
-  }
-  ,
-  "externally_connectable": {
-    "matches": ["http://localhost:5000/*"]
   }
 }

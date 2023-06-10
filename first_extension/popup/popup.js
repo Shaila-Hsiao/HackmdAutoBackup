@@ -1,7 +1,3 @@
-$( async () => {
-    const results = await $.get("http://shaila.org/wp-content/uploads/2023/06/uStx8CK.jpg")
-    console.log(results)
-});
 $("#YesBtn").on("click", function(event) { 
     console.log("Click!!!!");
     const API_data = document.getElementById("API_input").value;
