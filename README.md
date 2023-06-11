@@ -74,15 +74,15 @@
 	```
 ### 匯入 chrome extension
 - 先進入 `Manage Extension` 的頁面
-	![](https://hackmd.io/_uploads/By0Ufp682.png =300x)
+	<img src="https://hackmd.io/_uploads/By0Ufp682.png" width="300x"/>
 - 打開右上角 `Developer mode`
-	![](https://hackmd.io/_uploads/B1q6pnpU2.png =200x)
+	<img src="https://hackmd.io/_uploads/B1q6pnpU2.png" width="200x"/>
 - 就會顯示 三個按鈕，點選 `Load unpacked` 上傳資料夾 `first_extension`
-	![](https://hackmd.io/_uploads/Bk9363pUh.png =400x)
-	![](https://hackmd.io/_uploads/By7t0h6L2.png =400x)
-- 釘選擴充套件: 先點選 ![](https://hackmd.io/_uploads/rygXl6T82.png =20x)，再點選 :pushpin:
-	![](https://hackmd.io/_uploads/H1HxypaIh.png =200x)
-	![](https://hackmd.io/_uploads/By5AReQw3.gif =200x)
+	<img src="https://hackmd.io/_uploads/Bk9363pUh.png" width="400x"/>
+	<img src="https://hackmd.io/_uploads/By7t0h6L2.png" width="400x"/>
+- 釘選擴充套件: 先點選 <img src="https://hackmd.io/_uploads/rygXl6T82.png" width="20x"/>，再點選 :pushpin:
+	<img src="https://hackmd.io/_uploads/H1HxypaIh.png" width="200x"/>
+	<img src="https://hackmd.io/_uploads/By5AReQw3.gif =200x"/>
 
 ### WordPress Server 架設 HTTPS
 
