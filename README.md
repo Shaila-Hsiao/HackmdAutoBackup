@@ -83,6 +83,7 @@
 - 釘選擴充套件: 先點選 <img src="https://hackmd.io/_uploads/rygXl6T82.png" width="20x"/>，再點選 :pushpin:
     </br>
 	<img src="https://hackmd.io/_uploads/H1HxypaIh.png" width="200x"/>
+    </br>
 	<img src="https://hackmd.io/_uploads/By5AReQw3.gif =200x"/>
 
 ### WordPress Server 架設 HTTPS
