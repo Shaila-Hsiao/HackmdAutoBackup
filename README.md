@@ -74,8 +74,10 @@
 	```
 ### 匯入 chrome extension
 - 先進入 `Manage Extension` 的頁面
+    </br>
 	<img src="https://hackmd.io/_uploads/By0Ufp682.png" width="300x"/>
 - 打開右上角 `Developer mode`
+    </br>
 	<img src="https://hackmd.io/_uploads/B1q6pnpU2.png" width="200x"/>
 - 就會顯示 三個按鈕，點選 `Load unpacked` 上傳資料夾 `first_extension`
 	<img src="https://hackmd.io/_uploads/Bk9363pUh.png" width="400x"/>
