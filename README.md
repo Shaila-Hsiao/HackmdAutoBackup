@@ -145,7 +145,7 @@
 		![](https://hackmd.io/_uploads/BJkMQuoHn.png)
 	- 幫自己的 token 取名字（隨便取XD）
 		![](https://hackmd.io/_uploads/Bkc97djHn.png)
-- 點選擴充套件，輸入 API、Wordpress 的 user、password、url
+- 點選擴充套件，輸入 API、Wordpress 的 user、password、url，按下確認
 - 就可以到 WordPress 查看 HackMD 內容
 <!-- How to use your project -->
 ## 遇到的問題
