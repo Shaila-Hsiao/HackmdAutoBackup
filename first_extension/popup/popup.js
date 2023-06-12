@@ -8,6 +8,22 @@ $("#YesBtn").on("click", function(event) {
     console.log("account:",account);
     console.log("wp_password:",wp_password);
     console.log("wp_url:",wp_url);
+    // // 點選載入時的畫面
+    // chrome.storage.sync.set({ "status": 1 });
+    // // 點選時
+    // chrome.storage.sync.get("status").then((result)=>{
+    //     console.log("Value currently is " + result.status);
+    //     if (result.status == 0) {
+    //         console.log("null",result.status);
+    //       } else {
+    //         console.log("loading",result.status);
+    //     }
+    // });
+    // Click Button : Loading
+    $('#YesBtn').prop('disabled', true)
+    $('#Yes').text('Loading..')
+    $("#spinner").removeAttr("style");
+    $("#spinner").attr('hidden', false);
     $.ajax({
         type: "POST",
         url: "http:/localhost:5000/SendAPI",
@@ -20,7 +36,13 @@ $("#YesBtn").on("click", function(event) {
         contentType: "application/json",
         dataType: 'json', 
         success: function(msg){
-            console.log("msg:",msg);
+            console.log("msg:",msg[1]);
+            // 收到成功的話
+            chrome.storage.sync.set({ "status": 2 });
+            $('#YesBtn').prop('disabled', false)
+            $("#spinner").attr('hidden', true);
+            $("#finish").attr('hidden', false);
+
         },
         error: function(error){
             console.log("Error",error);
