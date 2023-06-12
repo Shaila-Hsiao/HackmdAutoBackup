@@ -42,7 +42,7 @@ $("#YesBtn").on("click", function(event) {
             $('#YesBtn').prop('disabled', false)
             $("#spinner").attr('hidden', true);
             $("#finish").attr('hidden', false);
-
+            $('#Yes').text('確定')
         },
         error: function(error){
             console.log("Error",error);
