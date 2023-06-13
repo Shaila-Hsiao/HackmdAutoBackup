@@ -92,7 +92,7 @@
 
 - 建立 Public Key、Private Key、Certificate
 	- [操作流程](https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8)
-- 到 `/etc/nginx/site-available` 修改 `wordpress.conf` : 新增 port 443 for SSL，並將創建好的 SSL Certificate 、Key 檔案位置放到設定檔內
+- 到 `/etc/nginx/sites-available` 修改 `wordpress.conf` : 新增 port 443 for SSL，並將創建好的 SSL Certificate 、Key 檔案位置放到設定檔內
 	```config=
 	server {
 		listen 80 ;
