@@ -16,18 +16,18 @@ def UpdateWP(account,wp_password,wp_url,html):
   url = 'http://'+wp_url+'/xmlrpc.php'
   # 找 title
   soup = BeautifulSoup(html, 'html.parser')
-  title = soup.h1.string
+  title = str(soup.h1.string)
   print("title",title)
-  # tag = soup.code.string
+  tag = str(soup.code.string)
   which = 'publish'
   wp = Client(url, id, password)
   post = WordPressPost()
   post.post_status = which
-  post.title = 'title'
+  post.title = title
   post.content = html
   post.excerpt = 'API TEST EXCERPT'
   post.terms_names = {
-      "post_tag": ['tag'],
+      "post_tag": [tag],
       "category": ['test']
   }
 
