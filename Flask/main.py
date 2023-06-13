@@ -76,6 +76,7 @@ def SendAPI():
         # 更新到 wordpress
         # markdown to html
         html = markdown.markdown(content)
+        print("HTML:\n",html,"\n")
         UpdateWP(account,wp_password,wp_url,content)
         
     results = {'status': API_data}
