@@ -6,7 +6,7 @@ import os
 from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
 from module.crawlerHackMD import crawlerHackMD, getContent
 from module.imageDeal import saveImage, getImageURL
-from module.UploadMedia import UploadImage
+from module.UploadMedia import UploadImage,UpdateWP
 app = Flask(__name__)
 CORS(app)
 # 創建資料夾儲存圖片
@@ -73,6 +73,8 @@ def SendAPI():
         content = replaceRule(markdown,hackmd_prefix,wp_img_name,wp_img_url)
         # 更新內容到 HackMD
         update(API_data,content,note_id_list[i])
+        # 更新到 wordpress
+        UpdateWP(account,wp_password,wp_url,content)
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":

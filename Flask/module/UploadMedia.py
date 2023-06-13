@@ -1,9 +1,35 @@
 from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.compat import xmlrpc_client
 from wordpress_xmlrpc.methods import media, posts
+from wordpress_xmlrpc.methods.posts import NewPost
+
 from os import walk
 from os.path import join
 import json
+
+
+#上傳內文
+def UpdateWP(account,wp_password,wp_url,content):
+  id = account
+  password = wp_password
+
+  url = 'http://'+wp_url+'/xmlrpc.php'
+
+  which = 'publish'
+  wp = Client(url, id, password)
+  post = WordPressPost()
+  post.post_status = which
+  post.title = 'API TEST'
+  post.content = content
+  post.excerpt = 'API TEST EXCERPT'
+  post.terms_names = {
+      "post_tag": ['test'],
+      "category": ['test']
+  }
+
+  wp.call(NewPost(post))
+
+  print("Update content")
 
 # 上傳照片
 def UploadImage(account,wp_password,wp_url,savePath):
