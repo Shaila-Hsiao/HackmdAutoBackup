@@ -23,7 +23,7 @@ def UpdateWP(account,wp_password,wp_url,html):
   wp = Client(url, id, password)
   post = WordPressPost()
   post.post_status = which
-  post.title = title
+  post.title = 'title'
   post.content = html
   post.excerpt = 'API TEST EXCERPT'
   post.terms_names = {
