@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, jsonify
 from flask_cors import CORS
 import os
-
+import markdown
 # module
 from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
 from module.crawlerHackMD import crawlerHackMD, getContent
@@ -73,6 +73,9 @@ def SendAPI():
         content = replaceRule(markdown,hackmd_prefix,wp_img_name,wp_img_url)
         # 更新內容到 HackMD
         update(API_data,content,note_id_list[i])
+        # markdown to html
+        html = markdown.markdown(content)
+        
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":

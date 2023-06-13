@@ -6,7 +6,6 @@ import urllib.request
 def saveImage(imageURLs,savePath):
     for imgURL in imageURLs:
         try:
-            print("~~~~~~~~~~~~",savePath + os.path.basename(imgURL))
             urllib.request.urlretrieve(imgURL, savePath + os.path.basename(imgURL))
         except:
             print("error on "+ imgURL)
