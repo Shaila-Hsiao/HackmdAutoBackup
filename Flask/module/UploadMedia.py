@@ -17,7 +17,8 @@ def UpdateWP(account,wp_password,wp_url,html):
   # 找 title
   soup = BeautifulSoup(html, 'html.parser')
   title = soup.h1.string
-  tag = soup.code.string
+  print("title",title)
+  # tag = soup.code.string
   which = 'publish'
   wp = Client(url, id, password)
   post = WordPressPost()
