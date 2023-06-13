@@ -26,7 +26,7 @@ def UpdateWP(account,wp_password,wp_url,html):
   post.content = html
   post.excerpt = 'API TEST EXCERPT'
   post.terms_names = {
-      "post_tag": [tag],
+      "post_tag": ['tag'],
       "category": ['test']
   }
 
