@@ -2,7 +2,7 @@ from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.compat import xmlrpc_client
 from wordpress_xmlrpc.methods import media, posts
 from wordpress_xmlrpc.methods.posts import NewPost
-
+from bs4 import BeautifulSoup
 from os import walk
 from os.path import join
 import json
@@ -14,16 +14,19 @@ def UpdateWP(account,wp_password,wp_url,html):
   password = wp_password
 
   url = 'http://'+wp_url+'/xmlrpc.php'
-
+  # 找 title
+  soup = BeautifulSoup(html, 'html.parser')
+  title = soup.h1.string
+  tag = soup.code.string
   which = 'publish'
   wp = Client(url, id, password)
   post = WordPressPost()
   post.post_status = which
-  post.title = 'API TEST'
+  post.title = title
   post.content = html
   post.excerpt = 'API TEST EXCERPT'
   post.terms_names = {
-      "post_tag": ['test'],
+      "post_tag": [tag],
       "category": ['test']
   }
 
