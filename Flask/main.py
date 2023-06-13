@@ -6,7 +6,7 @@ import markdown
 from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
 from module.crawlerHackMD import crawlerHackMD, getContent
 from module.imageDeal import saveImage, getImageURL
-from module.UploadMedia import UploadImage,UpdateWP
+from module.UploadMedia import UploadImage,UpdateWP,Md_Html
 app = Flask(__name__)
 CORS(app)
 # 創建資料夾儲存圖片
@@ -75,7 +75,7 @@ def SendAPI():
         update(API_data,content,note_id_list[i])
         # 更新到 wordpress
         # markdown to html
-        html = markdown.markdown(content)
+        html = Md_Html(content)
         print("HTML:\n",html,"\n")
         UpdateWP(account,wp_password,wp_url,html)
         
