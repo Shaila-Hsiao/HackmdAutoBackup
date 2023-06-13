@@ -1,4 +1,6 @@
 $("#YesBtn").on("click", function(event) { 
+    $("#unfinish").attr('hidden', true);
+    $("#finish").attr('hidden', true);
     console.log("Click!!!!");
     const API_data = document.getElementById("API_input").value;
     const account = document.getElementById("account").value;
