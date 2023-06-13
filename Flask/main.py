@@ -49,18 +49,18 @@ def SendAPI():
         try:
             # get markdown content html
             html = res_soup.find("div",class_="container-fluid markdown-body")
-            markdown_text = html.get_text()
+            markdown = html.get_text()
             f = open("test.txt","w")
             f.write(html)
             f.close
-            print("===>",type(markdown_text))
+            print("===>",type(markdown))
         # if the user's notes is forbidden
         except:
             # use HackMD API
-            markdown_text = get_hackmd_content(API_data,note_id_list[i])
-            print("===>",type(markdown_text))
+            markdown = get_hackmd_content(API_data,note_id_list[i])
+            print("===>",type(markdown))
         # 取得共筆內容的所有圖片網址
-        imageURLs = getImageURL(hackmd_prefix,markdown_text)
+        imageURLs = getImageURL(hackmd_prefix,markdown)
         # 將圖片儲存到 ./static/image (注意：最後一定要加個斜線)
         savePath = "./static/image/"
         saveImage(imageURLs,savePath)
@@ -70,22 +70,14 @@ def SendAPI():
         wp_img_name, wp_img_url = UploadImage(account,wp_password,wp_url,savePath)
         print("wp_img_url : ",wp_img_url)
         # HackMD 圖片網址換成 wordpress 網址
-        content = replaceRule(markdown_text,hackmd_prefix,wp_img_name,wp_img_url)
+        content = replaceRule(markdown,hackmd_prefix,wp_img_name,wp_img_url)
         # 更新內容到 HackMD
         update(API_data,content,note_id_list[i])
-<<<<<<< HEAD
-<<<<<<< HEAD
         # 更新到 wordpress
-        UpdateWP(account,wp_password,wp_url,content)
-=======
         # markdown to html
         html = markdown.markdown(content)
-=======
-        # markdown_text to html
-        html = markdown.markdown_text(content)
->>>>>>> 149be48331c2d374b1703c09d0bda662818c23f6
+        UpdateWP(account,wp_password,wp_url,content)
         
->>>>>>> 3d274c2f1fc991ecbfaf8f5e7924d20eaa1ac935
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":
