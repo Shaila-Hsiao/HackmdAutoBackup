@@ -6,11 +6,8 @@ from wordpress_xmlrpc.methods.posts import NewPost
 from os import walk
 from os.path import join
 import json
-import markdown
 
-def Md_Html(content):
-   content = markdown.markdown(content)
-   return content
+
 #上傳內文
 def UpdateWP(account,wp_password,wp_url,html):
   id = account
