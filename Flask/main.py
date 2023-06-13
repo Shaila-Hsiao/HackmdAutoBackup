@@ -77,7 +77,7 @@ def SendAPI():
         # markdown to html
         html = markdown.markdown(content)
         print("HTML:\n",html,"\n")
-        UpdateWP(account,wp_password,wp_url,content)
+        UpdateWP(account,wp_password,wp_url,html)
         
     results = {'status': API_data}
     return jsonify(results)

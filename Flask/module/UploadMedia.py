@@ -9,7 +9,7 @@ import json
 
 
 #上傳內文
-def UpdateWP(account,wp_password,wp_url,content):
+def UpdateWP(account,wp_password,wp_url,html):
   id = account
   password = wp_password
 
@@ -20,7 +20,7 @@ def UpdateWP(account,wp_password,wp_url,content):
   post = WordPressPost()
   post.post_status = which
   post.title = 'API TEST'
-  post.content = content
+  post.content = html
   post.excerpt = 'API TEST EXCERPT'
   post.terms_names = {
       "post_tag": ['test'],

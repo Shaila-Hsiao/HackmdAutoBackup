@@ -34,6 +34,11 @@ $("#YesBtn").on("click", function(event) {
         },
         error: function(error){
             console.log("Error",error);
+            // 收到成功的話
+            $('#YesBtn').prop('disabled', false)
+            $("#spinner").attr('hidden', true);
+            $("#unfinish").attr('hidden', false);
+            $('#Yes').text('確定')
         }
       });
 });
