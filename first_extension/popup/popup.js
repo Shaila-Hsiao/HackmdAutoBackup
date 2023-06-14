@@ -6,10 +6,10 @@ $("#YesBtn").on("click", function(event) {
     const account = document.getElementById("account").value;
     const wp_password = document.getElementById("wp_password").value;
     const wp_url = document.getElementById("wp_url").value;
-    console.log("API:",API_data);
-    console.log("account:",account);
-    console.log("wp_password:",wp_password);
-    console.log("wp_url:",wp_url);
+    // console.log("API:",API_data);
+    // console.log("account:",account);
+    // console.log("wp_password:",wp_password);
+    // console.log("wp_url:",wp_url);
     // Click Button : Loading
     $('#YesBtn').prop('disabled', true)
     $('#Yes').text('Loading..')
@@ -27,7 +27,7 @@ $("#YesBtn").on("click", function(event) {
         contentType: "application/json",
         dataType: 'json', 
         success: function(msg){
-            console.log("msg:");
+            console.log("msg:",msg);
             // 收到成功的話
             $('#YesBtn').prop('disabled', false)
             $("#spinner").attr('hidden', true);
