@@ -73,7 +73,11 @@ def SendAPI():
         # 找 title
         soup = BeautifulSoup(html, 'html.parser')
         hackmd_title = str(soup.h1.string)
-        tag = str(soup.code.string)
+        try:
+            tag = str(soup.code.string)
+        except:
+            tag = 'No Tag'
+            print("No tag")
         print("title = ",hackmd_title)
         # Update Post to Wordpress
         if hackmd_title in wp_title_dic.keys():
