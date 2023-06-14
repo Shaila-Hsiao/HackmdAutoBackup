@@ -18,9 +18,7 @@ if os.path.exists('./static') == False:
 if os.path.exists('./static/image') == False:
     os.makedirs('./static/image')
 
-@app.route('/')
-# def index():
-#   return render_template('index.html')
+
 @app.route('/SendAPI', methods=['POST'])
 def SendAPI():
     API_data = request.json['API_data']
@@ -47,8 +45,6 @@ def SendAPI():
         res_soup = getContent(urls[i])
         # FIXME: 測試用： 查看共筆標題
         print("note url =",urls[i])
-        print("hackmd title =",res_soup.head.title)
-        hackmd_title = ''
         # user's notes is public
         try:
             # get markdown content html
@@ -63,8 +59,6 @@ def SendAPI():
         # 將圖片儲存到 ./static/image (注意：最後一定要加個斜線)
         savePath = "./static/image/"
         saveImage(imageURLs,savePath)
-        num += 1
-        print('\r' + str(num) + '/' + str(len(urls)), end='')
         # 上傳照片，取得照片在 wordpress 的 URL
         wp_img_name, wp_img_url = UploadImage(account,wp_password,wp_url,savePath)
         print("wp_img_url : ",wp_img_url)
@@ -74,18 +68,21 @@ def SendAPI():
         update(API_data,content,note_id_list[i])
         # markdown to html
         html = markdown.markdown(content)
-        print("HTML:\n",html,"\n")
+        # 取得所有 wordpress 標題和 ID
+        wp_title_dic = get_wp_titles(account,wp_password,wp_url)
         # 找 title
         soup = BeautifulSoup(html, 'html.parser')
         hackmd_title = str(soup.h1.string)
-        wp_title_dic = get_wp_titles(account,wp_password,wp_url)
+        tag = str(soup.code.string)
+        print("title = ",hackmd_title)
+        # Update Post to Wordpress
         if hackmd_title in wp_title_dic.keys():
-            # Update Post to Wordpress
-            UpdateWP(wp_title_dic[hackmd_title],account,wp_password,wp_url,html)
+            UpdateWP(wp_title_dic[hackmd_title],account,wp_password,wp_url,html,hackmd_title,tag)
+        # Create Post to wordpress
         else:
-            # Create Post to wordpress
             CreateWP(account,wp_password,wp_url,html)
-
+        num += 1
+        print('\r' + str(num) + '/' + str(len(urls)), end='')
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":

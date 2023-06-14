@@ -1,11 +1,10 @@
 from wordpress_xmlrpc import Client, WordPressPost
 from wordpress_xmlrpc.compat import xmlrpc_client
-from wordpress_xmlrpc.methods import media, posts
+from wordpress_xmlrpc.methods import media
 from wordpress_xmlrpc.methods.posts import NewPost,EditPost
 from bs4 import BeautifulSoup
 from os import walk
 from os.path import join
-import json
 
 #Update Content
 def UpdateWP(post_id,account,wp_password,wp_url,html):
@@ -13,24 +12,17 @@ def UpdateWP(post_id,account,wp_password,wp_url,html):
   password = wp_password
   url = 'http://'+wp_url+'/xmlrpc.php'
   client = Client(url, id, password)
-  print("EditPost:",post_id,html,"\n===============")
   result = client.call(EditPost(post_id, {'post_content': html}))
-  print("Update content",result)
   #Returns: True on successful edit.
   return result
 
 
 #上傳內文
-def CreateWP(account,wp_password,wp_url,html):
+def CreateWP(account,wp_password,wp_url,html,title,tag):
   id = account
   password = wp_password
 
   url = 'http://'+wp_url+'/xmlrpc.php'
-  # 找 title
-  soup = BeautifulSoup(html, 'html.parser')
-  title = str(soup.h1.string)
-  print("title",title)
-  tag = str(soup.code.string)
   which = 'publish'
   wp = Client(url, id, password)
   post = WordPressPost()
@@ -49,9 +41,6 @@ def CreateWP(account,wp_password,wp_url,html):
 # 上傳照片
 def UploadImage(account,wp_password,wp_url,savePath):
   global media
-  # Login
-  # with open('account.json', 'r', encoding='utf-8') as f:
-  #     account = json.load(f)
   # 登入帳號、密碼
   id = account
   password = wp_password
@@ -78,22 +67,18 @@ def UploadImage(account,wp_password,wp_url,savePath):
   for root,dirs ,files in walk(savePath):
     for f in files:
       fullpath = join(root, f)
-      print("f=====\n",f)
       if f in exsist_WPImg:
         print("exsist Image")
       else:
         ImgPath.append(fullpath)
         ImgName.append(f)
         print("filesPath 【",f,"】 : ",fullpath)
-        print(ImgPath)
-        print(ImgName)
 
 
   # 依續將資料夾內所有照片上傳至wordpress
   for i in range(len(ImgPath)):
     # set to the path to your file
     filename = ImgPath[i]
-    print("filename",filename)
     # prepare metadata
     data = {
             'name': ImgName[i],
@@ -110,7 +95,6 @@ def UploadImage(account,wp_password,wp_url,savePath):
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
       print("url",response['url'])
-      #attachment_id = response['id']
     except:
        print("error")
     # response == {

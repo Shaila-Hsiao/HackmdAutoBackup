@@ -31,18 +31,14 @@ def get_hackmd_urls(token):
     data = data[:1]
     # get url of notes
     urls = []
+    # get id of notes
     note_id_list = []
+
     for i in range(len(data)):
         noteURL = data[i]['publishLink']
         node_id = data[i]["id"]
         urls.append(noteURL)
         note_id_list.append(node_id)
-    '''
-    get view mode urls
-    for i in range(len(data)):
-        noteURL = f"https://hackmd.io/{data[i]['id']}?view"
-        urls.append(noteURL)
-    '''
     return urls,note_id_list
 # use HackMD API for getting content of note
 def get_hackmd_content(token,note_id):
