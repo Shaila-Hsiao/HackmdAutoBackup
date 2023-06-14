@@ -1,4 +1,5 @@
 from PyHackMD import API
+import re
 
 # update the content to HackMD
 def update(token,html,note_id):
@@ -10,16 +11,14 @@ def update(token,html,note_id):
     print("modify status:",result)
     # return result # 顯示 Accept: 成功修改
 
-def replaceRule(markdown,prefix,wp_img_name,wp_img_url):
+# hackmd 的圖片網址換成 wordpress 圖片網址
+def replaceRule(markdown,wp_img_name,wp_img_url):
     for i in range(len(wp_img_name)):
-        # 目前共筆內有的前綴網址 （ex: https://hackmd.io/_uploads/）
-        for url in prefix:
-            # 共筆連結
-            url = url + wp_img_name[i]
-            # 共筆內有此 HackMD 連結，就把 WordPress 連結取代
-            if url in markdown:
-                markdown = markdown.replace(url,wp_img_url[i])
-    # wordpress image link re HackMD 的圖片連結
+        # 找到此圖片原本的 hackmd 網址
+        hackmd_img_url = re.findall("https[^*\ ()]*"+wp_img_name[i], markdown)
+        # replace hackmd url with wordpress url 
+        for url in hackmd_img_url:
+            markdown = markdown.replace(url,wp_img_url[i])
     return markdown
 
 # get user's url of notes

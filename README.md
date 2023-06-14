@@ -49,6 +49,7 @@
     pip install selenium
     pip install python-HackMD
     pip install beautifulsoup4
+	pip install markdown
 	```
 - 安裝 WordPress
 	- [操作流程參考資料](https://hackmd.io/@pinping/wordpress教學)
