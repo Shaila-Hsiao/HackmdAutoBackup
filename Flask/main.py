@@ -77,10 +77,10 @@ def SendAPI():
         print("title = ",hackmd_title)
         # Update Post to Wordpress
         if hackmd_title in wp_title_dic.keys():
-            UpdateWP(wp_title_dic[hackmd_title],account,wp_password,wp_url,html,hackmd_title,tag)
+            UpdateWP(wp_title_dic[hackmd_title],account,wp_password,wp_url,html)
         # Create Post to wordpress
         else:
-            CreateWP(account,wp_password,wp_url,html)
+            CreateWP(account,wp_password,wp_url,html,hackmd_title,tag)
         num += 1
         print('\r' + str(num) + '/' + str(len(urls)), end='')
     results = {'status': API_data}
