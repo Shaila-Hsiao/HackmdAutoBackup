@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "version": "1.0",
-  "name": "Hello Shaila",
-  "description": "A plain text description",
+  "name": "HackMD backup To WordPress",
+  "description": "HackMD backup To WordPress",
   "icons": {  
     "16": "icon.png" 
   },
@@ -11,7 +11,6 @@
     "type": "module"
   },
   "permissions": [
-    "storage", 
     "activeTab", 
     "tabs", 
     "cookies",
