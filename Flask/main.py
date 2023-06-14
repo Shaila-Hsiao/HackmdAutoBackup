@@ -2,11 +2,14 @@ from flask import Flask, render_template, url_for, request, jsonify
 from flask_cors import CORS
 import os
 import markdown
+from bs4 import BeautifulSoup
+
 # module
 from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
 from module.crawlerHackMD import crawlerHackMD, getContent
 from module.imageDeal import saveImage, getImageURL
-from module.UploadMedia import UploadImage,UpdateWP
+from module.UploadMedia import UploadImage,UpdateWP,CreateWP
+from module.wp_titles import get_wp_titles
 app = Flask(__name__)
 CORS(app)
 # 創建資料夾儲存圖片
@@ -25,13 +28,13 @@ def SendAPI():
     account = request.json['account']
     wp_password = request.json['wp_password']
     wp_url = request.json['wp_url']
-    print(API_data,account,wp_url,wp_password) 
+    print(API_data,account,wp_url,wp_password)
     # get hackmqd urls
     urls, note_id_list = get_hackmd_urls(API_data)
     # FIXME: 測試用：已經完成了多少共筆的圖片備份
     num = 0
     for i in range(len(urls)):
-        wp_img_name, wp_img_url = [],[] 
+        wp_img_name, wp_img_url = [],[]
         # 共筆內圖片的前綴網址
         hackmd_prefix = ["https://hackmd.io/_uploads/","https://i.imgur.com/"]
         '''
@@ -44,7 +47,8 @@ def SendAPI():
         res_soup = getContent(urls[i])
         # FIXME: 測試用： 查看共筆標題
         print("note url =",urls[i])
-        print("title =",res_soup.head.title)
+        print("hackmd title =",res_soup.head.title)
+        hackmd_title = ''
         # user's notes is public
         try:
             # get markdown content html
@@ -71,9 +75,17 @@ def SendAPI():
         # markdown to html
         html = markdown.markdown(content)
         print("HTML:\n",html,"\n")
-        # 更新到 wordpress
-        UpdateWP(account,wp_password,wp_url,html)
-        
+        # 找 title
+        soup = BeautifulSoup(html, 'html.parser')
+        hackmd_title = str(soup.h1.string)
+        wp_title_dic = get_wp_titles(account,wp_password,wp_url)
+        if hackmd_title in wp_title_dic.keys():
+            # Update Post to Wordpress
+            UpdateWP(wp_title_dic[hackmd_title],account,wp_password,wp_url,html)
+        else:
+            # Create Post to wordpress
+            CreateWP(account,wp_password,wp_url,html)
+
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":

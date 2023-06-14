@@ -5,7 +5,7 @@ import re
 def update(token,markdown,note_id):
     api = API(token)
     # FIXME: 測試用：開一個空白共筆寫入
-    note_id = "YNgKU6mkS6a4v6bKwomqpw"
+    note_id = "deVGtwP8SY-Dy_Zt-jTVUQ"
     # update the content of note
     result = api.update_note(note_id, content='')
     result = api.update_note(note_id, content=markdown)
@@ -49,4 +49,3 @@ def get_hackmd_content(token,note_id):
     api = API(token)
     data = api.get_note(note_id)
     return data["content"]
-
