@@ -1,5 +1,5 @@
 # 嘿!MD 你還在窩被子裡
-[TOC]
+
 ## Concept Development
 <!-- Why does your team want to build this idea/project?  -->
 近期 Imgur 宣布會刪除部分照片，包括觸及率低、色情、違法的照片，因此像是我們個人的筆記可能就會因為觸及率低的原因被刪除，而 HackMD 本身是可以下載備份檔案，但只會備份文字內容(.md)，照片依舊是以 Imgur 連結的方式來顯示，因此若 Imgur 官方刪除照片時，照片就真的會完全消失了。
