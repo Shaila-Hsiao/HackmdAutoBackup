@@ -34,9 +34,17 @@ def UpdateWP(account,wp_password,wp_url,html):
   wp.call(NewPost(post))
 
   print("Update content")
-
+def checkExist(f,exsist_WPImg):
+  print("Check!: ",f)
+  for item in exsist_WPImg:
+    print("exsist Img:",item,type(item))
+    if f == item :
+      return True
+    else :
+      return False
 # 上傳照片
 def UploadImage(account,wp_password,wp_url,savePath):
+  global media
   # Login
   # with open('account.json', 'r', encoding='utf-8') as f:
   #     account = json.load(f)
@@ -45,25 +53,34 @@ def UploadImage(account,wp_password,wp_url,savePath):
   password = wp_password
   # wp_url : 
   url = 'http://'+wp_url+'/xmlrpc.php'
-
   which = 'publish'
-
   client = Client(url, id, password)
+  # 呼叫GetMediaLibrary方法獲取媒體庫中的圖片資訊 media = []
+  try:
+    media = client.call(media.GetMediaLibrary({'mime_type':"image/jepg" }))
+  except:
+    print("first upload")
+  exsist_WPImg = []
+  for item in media:
+    exsist_WPImg.append(item.title)
   # 照片路徑list
   ImgPath = []
   # 照片名稱list
   ImgName = []
   wp_img_name = []
   wp_img_url = []
-  # 存入照片路徑與名稱
-  for root, dirs, files in walk(savePath):
+  for root,dirs ,files in walk(savePath):
     for f in files:
       fullpath = join(root, f)
-      ImgPath.append(fullpath)
-      ImgName.append(f)
-      print("filesPath 【",f,"】 : ",fullpath)
-      print(ImgPath)
-      print(ImgName)
+      if(checkExist(f,exsist_WPImg)==True):
+        print("exsist Image")
+      else:
+        ImgPath.append(fullpath)
+        ImgName.append(f)
+        print("filesPath 【",f,"】 : ",fullpath)
+        print(ImgPath)
+        print(ImgName)
+
 
   # 依續將資料夾內所有照片上傳至wordpress
   for i in range(len(ImgPath)):
@@ -73,7 +90,7 @@ def UploadImage(account,wp_password,wp_url,savePath):
     # prepare metadata
     data = {
             'name': ImgName[i],
-            'type': 'image/jpeg',  # mimetype
+            'type': 'image/jepg',  # mimetype
     }
     print(data)
     # read the binary file and let the XMLRPC library encode it into base64
@@ -82,7 +99,7 @@ def UploadImage(account,wp_password,wp_url,savePath):
     try:
       response = client.call(media.UploadFile(data))
       # 印出 url
-      print("url",response['url'])
+      # print("url",response['url'])
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
       print("url",response['url'])

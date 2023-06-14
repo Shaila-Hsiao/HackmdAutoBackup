@@ -2,12 +2,13 @@ from PyHackMD import API
 import re
 
 # update the content to HackMD
-def update(token,html,note_id):
+def update(token,markdown,note_id):
     api = API(token)
     # FIXME: 測試用：開一個空白共筆寫入
     note_id = "YNgKU6mkS6a4v6bKwomqpw"
     # update the content of note
-    result = api.update_note(note_id, content=html)
+    result = api.update_note(note_id, content='')
+    result = api.update_note(note_id, content=markdown)
     print("modify status:",result)
     # return result # 顯示 Accept: 成功修改
 
