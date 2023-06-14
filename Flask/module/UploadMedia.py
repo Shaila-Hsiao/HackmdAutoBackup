@@ -46,7 +46,6 @@ def UploadImage(account,wp_password,wp_url,savePath):
   password = wp_password
   # wp_url : 
   url = 'http://'+wp_url+'/xmlrpc.php'
-  which = 'publish'
   client = Client(url, id, password)
   # 呼叫GetMediaLibrary方法獲取媒體庫中的圖片資訊 media = []
   try:
@@ -54,10 +53,8 @@ def UploadImage(account,wp_password,wp_url,savePath):
   except:
     print("first upload")
   exsist_WPImg = []
-  print("Media",exsist_media)
   for item in exsist_media:
     exsist_WPImg.append(item.title)
-  print("Exsist",exsist_WPImg)
   # 照片路徑list
   ImgPath = []
   # 照片名稱list
@@ -73,7 +70,6 @@ def UploadImage(account,wp_password,wp_url,savePath):
         ImgPath.append(fullpath)
         ImgName.append(f)
         print("filesPath 【",f,"】 : ",fullpath)
-
 
   # 依續將資料夾內所有照片上傳至wordpress
   for i in range(len(ImgPath)):
@@ -91,7 +87,6 @@ def UploadImage(account,wp_password,wp_url,savePath):
     try:
       response = client.call(media.UploadFile(data))
       # 印出 url
-      # print("url",response['url'])
       wp_img_name.append(response['file'])
       wp_img_url.append(response['url'])
       print("url",response['url'])

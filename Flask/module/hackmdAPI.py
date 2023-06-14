@@ -4,8 +4,6 @@ import re
 # update the content to HackMD
 def update(token,markdown,note_id):
     api = API(token)
-    # FIXME: 測試用：開一個空白共筆寫入
-    note_id = "deVGtwP8SY-Dy_Zt-jTVUQ"
     # update the content of note
     result = api.update_note(note_id, content='')
     result = api.update_note(note_id, content=markdown)
@@ -27,7 +25,7 @@ def get_hackmd_urls(token):
     api = API(token)
     # get all notes in token
     data = api.get_note_list()
-    # FIXME: test
+    # FIXME: 因為目前只有在本機架設 wordpress，外網的使用者無法看到 wordpress 圖片，所以暫時測試一個共筆
     data = data[:1]
     # get url of notes
     urls = []
