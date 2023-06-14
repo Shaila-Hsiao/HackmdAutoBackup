@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 # module
 from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
-from module.crawlerHackMD import crawlerHackMD, getContent
+from module.crawlerHackMD import getContent
 from module.imageDeal import saveImage, getImageURL
 from module.UploadMedia import UploadImage,UpdateWP,CreateWP
 from module.wp_titles import get_wp_titles
