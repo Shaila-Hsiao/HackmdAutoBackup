@@ -175,3 +175,4 @@
 - [How to create an HTTPS certificate for localhost domains](https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8)
 - [HackMD API](https://hackmd.io/@hackmd-api/developer-portal/https%3A%2F%2Fhackmd.io%2F%40hackmd-api%2Fuser-notes-api)
 - [Wordpress API : XML-RPC](https://python-wordpress-xmlrpc.readthedocs.io/en/latest/ref/methods.html#wordpress_xmlrpc.methods.media.GetMediaLibrary)
+- [connect to wordpress](https://github.com/whuhan2013/pythoncode/blob/master/wordpress/wordpress.py)
