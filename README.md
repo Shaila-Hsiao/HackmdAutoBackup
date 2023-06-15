@@ -57,15 +57,15 @@
 	```
 ### 匯入 chrome extension
 - 先進入 `Manage Extension` 的頁面
-	![](https://hackmd.io/_uploads/By0Ufp682.png =300x)
+	<img= src="https://hackmd.io/_uploads/By0Ufp682.png"> width="300x">
 - 打開右上角 `Developer mode`
-	![](https://hackmd.io/_uploads/B1q6pnpU2.png =200x)
+	<img= src="https://hackmd.io/_uploads/B1q6pnpU2.png"> width="200x">
 - 就會顯示 三個按鈕，點選 `Load unpacked` 上傳資料夾 `first_extension`
-	![](https://hackmd.io/_uploads/Bk9363pUh.png =400x)
-	![](https://hackmd.io/_uploads/By7t0h6L2.png =400x)
-- 釘選擴充套件: 先點選 ![](https://hackmd.io/_uploads/rygXl6T82.png =20x)，再點選 :pushpin:
-	![](https://hackmd.io/_uploads/H1HxypaIh.png =200x)
-	![](https://hackmd.io/_uploads/By5AReQw3.gif =200x)
+	<img= src="https://hackmd.io/_uploads/Bk9363pUh.png"> width="400x">
+	<img= src="https://hackmd.io/_uploads/By7t0h6L2.png"> width="400x">
+- 釘選擴充套件: 先點選 <img= src="https://hackmd.io/_uploads/rygXl6T82.png" width="20x">，再點選 :pushpin:
+	<img= src="https://hackmd.io/_uploads/H1HxypaIh.png"> width="200x">
+	<img= src="https://hackmd.io/_uploads/By5AReQw3.gif"> width="200x">
 
 ### WordPress Server 架設 HTTPS
 - 安裝 openssl
@@ -115,9 +115,9 @@
 - 此時網站不完全是 HTTPS，而是有可能變成混合內容的網站
 	> 同一網站中同時存在加密的 HTTPS 內容和非加密的 HTTP 內容，這可能會導致瀏覽器顯示安全警告或封鎖非加密的內容。
 - 到 WorPress 安裝套件 : [Really Simple SSL](https://loyseo.com/zh/how-to-change-http-in-wordpress-website-to-https/) 
-	![](https://hackmd.io/_uploads/ry38inWvh.png)
+	<img= src="https://hackmd.io/_uploads/ry38inWvh.png">
 	- 再到 【外掛】-> 【已安裝的外掛】-> Really Simple SSL 【啟用】 
-		![](https://hackmd.io/_uploads/rJSMn2Wv3.png)
+		<img= src="https://hackmd.io/_uploads/rJSMn2Wv3.png">
 ## Usage
 - 開啟虛擬機 
 	- 開啟 Nginx
@@ -125,7 +125,7 @@
         sudo service nginx start
         ```
     - 查看 Nginx 狀態確保 WordPress 正常運作
-    ![](https://hackmd.io/_uploads/ryCjKNuDh.png)
+    <img= src="https://hackmd.io/_uploads/ryCjKNuDh.png">
 	- 開啟 Flask Server
 	    ```cmd=
 		cd ./Flask
@@ -134,15 +134,15 @@
 - 取得 HackMD API Token
 	> 利用 Token 免登入 HackMD 就可以取得所有共筆網址或是獲取私人筆記內容
 	- 創建自己的 HackMD API token
-		![](https://hackmd.io/_uploads/BJkMQuoHn.png)
+		<img= src="https://hackmd.io/_uploads/BJkMQuoHn.png">
 	- 幫自己的 token 取名字（隨便取XD）
-		![](https://hackmd.io/_uploads/Bkc97djHn.png)
+		<img= src="https://hackmd.io/_uploads/Bkc97djHn.png">
 - 點選擴充套件，輸入 API 與 Wordpress 的 Account、Password、Domain name，點選確認
-	![](https://hackmd.io/_uploads/BkpPPKPP3.png)
+	<img= src="https://hackmd.io/_uploads/BkpPPKPP3.png">
 - 顯示成功備份
-	![](https://hackmd.io/_uploads/HJUXuYDDh.png)
+	<img= src="https://hackmd.io/_uploads/HJUXuYDDh.png">
 - 就可以到 WordPress 查看已備份的 HackMD 內容
-    ![](https://hackmd.io/_uploads/SkcOsEOw2.png)
+    <img= src="https://hackmd.io/_uploads/SkcOsEOw2.png">
 - HackMD 筆記內的圖片連結也會換成 WordPress 圖片連結
 
 ## 遇到的問題
@@ -155,7 +155,7 @@
 		```
 - 照片無法正常於 Hackmd 上讀取 : 
 	- 發現 Console 報錯 : 共筆內圖片網址為 `http://....`，網頁回傳報錯顯示 `https://...`
-		![](https://hackmd.io/_uploads/SykEAjWP2.png)
+		<img= src="https://hackmd.io/_uploads/SykEAjWP2.png">
 		- Hackmd 請求圖片資源都是由 `https://...` 去請求
 		- 因此設定 Nginx SSL ( 設定 port 443 與創建憑證 ) 
 - 使用 Certbot 創建憑證 : 但沒有公開 IP 無法向 CA 申請憑證
