@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 # module
 from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
-from module.crawlerHackMD import crawlerHackMD, getContent
+from module.crawlerHackMD import getContent
 from module.imageDeal import saveImage, getImageURL
 from module.UploadMedia import UploadImage,UpdateWP,CreateWP
 from module.wp_titles import get_wp_titles
@@ -73,7 +73,11 @@ def SendAPI():
         # 找 title
         soup = BeautifulSoup(html, 'html.parser')
         hackmd_title = str(soup.h1.string)
-        tag = str(soup.code.string)
+        try:
+            tag = str(soup.code.string)
+        except:
+            tag = 'No Tag'
+            print("No tag")
         print("title = ",hackmd_title)
         # Update Post to Wordpress
         if hackmd_title in wp_title_dic.keys():
