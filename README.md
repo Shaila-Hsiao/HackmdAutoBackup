@@ -51,14 +51,6 @@
 		sudo apt install php7.4-fpm php7.4-mysql php-curl php-dom php-imagick php-mbstring php-zip php-gd php-intl
 		```
 		> 注意安裝版本 : 此範例為 Ubuntu 20.04 安裝 php7.4
-- 下載 chromedriver
-	- 查看 chrome 版本
-		![](https://hackmd.io/_uploads/S1QsvbJvh.png)
-		> 如果使用 ubuntu 系統可下指令 `google-chrome --version`
-	- chrome 版本顯示於框框中 => 範例版本為 114
-		![](https://hackmd.io/_uploads/ByeLuZyv3.png)
-	- 到[ 官網下載 ](https://chromedriver.chromium.org/downloads)目前電腦 chrome 版本的 ChromeDriver （圖中為下載本範例版本示意圖）
-		![](https://hackmd.io/_uploads/B1rcKW1w3.png)
 - 下載 Github 專案 
 	```shell=
 	git clone https://github.com/Shaila-Hsiao/HackmdAutoBackup.git
