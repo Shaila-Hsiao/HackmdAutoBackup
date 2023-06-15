@@ -3,9 +3,9 @@ from flask_cors import CORS
 import os
 import markdown
 from bs4 import BeautifulSoup
-
+import time
 # module
-from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content
+from module.hackmdAPI import get_hackmd_urls, replaceRule, update, get_hackmd_content, changeUser, revertUser
 from module.crawlerHackMD import getContent
 from module.imageDeal import saveImage, getImageURL
 from module.UploadMedia import UploadImage,UpdateWP,CreateWP
@@ -28,10 +28,11 @@ def SendAPI():
     wp_url = request.json['wp_url']
     print(API_data,account,wp_url,wp_password)
     # get hackmqd urls
-    urls, note_id_list = get_hackmd_urls(API_data)
+    data = get_hackmd_urls(API_data)
+    # urls, note_id_list = get_hackmd_urls(API_data)
     # FIXME: 測試用：已經完成了多少共筆的圖片備份
     num = 0
-    for i in range(len(urls)):
+    for i in range(len(data)):
         wp_img_name, wp_img_url = [],[]
         # 共筆內圖片的前綴網址
         hackmd_prefix = ["https://hackmd.io/_uploads/","https://i.imgur.com/"]
@@ -41,19 +42,24 @@ def SendAPI():
         # download markdown file -> the markdown file will show up in the Download folder
         crawlerHackMD(url, chromeDriverPath)
         '''
-        # 取得共筆網頁內容
-        res_soup = getContent(urls[i])
         # FIXME: 測試用： 查看共筆標題
-        print("note url =",urls[i])
+        # print("note url =",urls[i])
         # user's notes is public
-        try:
-            # get markdown content html
+        isChange = changeUser(data[i],API_data)
+        # 取得共筆網頁內容
+        res_soup = getContent(data[i]["publishLink"])
+        # get markdown content html
+        html = res_soup.find("div",class_="container-fluid markdown-body")
+        markdown_text = html.get_text()
+        '''
+        # try:
             html = res_soup.find("div",class_="container-fluid markdown-body")
             markdown_text = html.get_text()
         # if the user's notes is forbidden
-        except:
+        # except:
             # use HackMD API
-            markdown_text = get_hackmd_content(API_data,note_id_list[i])
+            # markdown_text = get_hackmd_content(API_data,note_id_list[i])
+        '''
         # 取得共筆內容的所有圖片網址
         imageURLs = getImageURL(hackmd_prefix,markdown_text)
         # 將圖片儲存到 ./static/image (注意：最後一定要加個斜線)
@@ -65,7 +71,8 @@ def SendAPI():
         # HackMD 圖片網址換成 wordpress 網址
         content = replaceRule(markdown_text,wp_img_name,wp_img_url)
         # 更新內容到 HackMD
-        update(API_data,content,note_id_list[i])
+        update(API_data,content,data[i]["id"])
+        # update(API_data,content,note_id_list[i])
         # markdown to html
         html = markdown.markdown(content)
         # 取得所有 wordpress 標題和 ID
@@ -86,7 +93,9 @@ def SendAPI():
         else:
             CreateWP(account,wp_password,wp_url,html,hackmd_title,tag)
         num += 1
-        print('\r' + str(num) + '/' + str(len(urls)), end='')
+        print('\r' + str(num) + '/' + str(len(data)), end='')
+        # 恢復原始狀態
+        revertUser(data[i],API_data,isChange)
     results = {'status': API_data}
     return jsonify(results)
 if __name__ == "__main__":

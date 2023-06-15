@@ -1,6 +1,27 @@
 from PyHackMD import API
 import re
-
+import time
+def revertUser(note,token,isChange):
+    api = API(token)
+    if isChange == True:
+        print(note['id'], note['title'], note['writePermission'])
+        time.sleep(1)
+        # 依note_id將編輯權限全改成owner
+        api.update_note( note_id=note['id'], write_permission = "owner")
+        time.sleep(1)
+def changeUser(note,token):
+    api = API(token)
+    isChange = False
+    if note['writePermission'] == 'owner' or note['writePermission'] == 'signed_in':
+        print(note['id'], note['title'], note['writePermission'])
+        time.sleep(1)
+        # 依note_id將編輯權限全改成owner
+        api.update_note( note_id=note['id'], write_permission = "guest")
+        time.sleep(1)
+        isChange = True
+    return isChange
+        # _ = api.get_note(note_id=note['id'])
+        # print(_['id'], _['title'], _['writePermission'])
 # update the content to HackMD
 def update(token,markdown,note_id):
     api = API(token)
@@ -32,12 +53,13 @@ def get_hackmd_urls(token):
     # get id of notes
     note_id_list = []
 
-    for i in range(len(data)):
-        noteURL = data[i]['publishLink']
-        node_id = data[i]["id"]
-        urls.append(noteURL)
-        note_id_list.append(node_id)
-    return urls,note_id_list
+    # for i in range(len(data)):
+    #     noteURL = data[i]['publishLink']
+    #     node_id = data[i]["id"]
+    #     urls.append(noteURL)
+    #     note_id_list.append(node_id)
+    # return urls,note_id_list
+    return data
 # use HackMD API for getting content of note
 def get_hackmd_content(token,note_id):
     api = API(token)
