@@ -7,7 +7,7 @@ def revertUser(note,token,isChange):
         print(note['id'], note['title'], note['writePermission'])
         time.sleep(1)
         # 依note_id將編輯權限全改成owner
-        api.update_note( note_id=note['id'], write_permission = "owner")
+        api.update_note( note_id=note['id'], write_permission = "owner",read_permission="owner")
         time.sleep(1)
 def changeUser(note,token):
     api = API(token)
