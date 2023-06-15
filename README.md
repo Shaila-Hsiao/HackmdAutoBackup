@@ -11,13 +11,14 @@
 ## Existing Library/Software
 <!-- Which libraries do you use while you implement the project -->
 - 前端框架：Bootstrap 5.0
-- 爬蟲： Beautiful Soup
-- 後端：Python Flask (Python3)
 - 擴充套件：Chrome Extension 
+- 爬蟲：request 涵式庫、Beautiful Soup
+- 後端：Python Flask (Python3)
 - API: 
 	- [HackMD API](https://hackmd.io/@hackmd-api/developer-portal/https%3A%2F%2Fhackmd.io%2F%40hackmd-api%2Fuser-notes-api)
 	- [Wordpress API : XML-RPC](https://python-wordpress-xmlrpc.readthedocs.io/en/latest/ref/methods.html#wordpress_xmlrpc.methods.media.GetMediaLibrary)
 - Wordpress (版本 6.2.2)
+- PHP (版本 7.4)
 - Database: MariaDB ( 版本 10.3.38 )
 - Web Sever:  Nginx ( 版本 1.18.0)
 ## Implementation Process (實作流程)
@@ -64,15 +65,15 @@
 	```
 ### 匯入 chrome extension
 - 先進入 `Manage Extension` 的頁面
-	<img src="https://hackmd.io/_uploads/By0Ufp682.png" width="300x"/>
+	![](https://hackmd.io/_uploads/By0Ufp682.png =300x)
 - 打開右上角 `Developer mode`
-	<img src="https://hackmd.io/_uploads/B1q6pnpU2.png" width="200x"/>
+	![](https://hackmd.io/_uploads/B1q6pnpU2.png =200x)
 - 就會顯示 三個按鈕，點選 `Load unpacked` 上傳資料夾 `first_extension`
-	<img src="https://hackmd.io/_uploads/Bk9363pUh.png" width="400x"/>
-	<img src="https://hackmd.io/_uploads/By7t0h6L2.png" width="400x"/>
-- 釘選擴充套件: 先點選 <img src="https://hackmd.io/_uploads/rygXl6T82.png" width="20x"/>，再點選 :pushpin:
-	<img src="https://hackmd.io/_uploads/H1HxypaIh.png" width="200x"/>
-	<img src="https://hackmd.io/_uploads/By5AReQw3.gif" width="200x"/>
+	![](https://hackmd.io/_uploads/Bk9363pUh.png =400x)
+	![](https://hackmd.io/_uploads/By7t0h6L2.png =400x)
+- 釘選擴充套件: 先點選 ![](https://hackmd.io/_uploads/rygXl6T82.png =20x)，再點選 :pushpin:
+	![](https://hackmd.io/_uploads/H1HxypaIh.png =200x)
+	![](https://hackmd.io/_uploads/By5AReQw3.gif =200x)
 
 ### WordPress Server 架設 HTTPS
 - 安裝 openssl
@@ -127,14 +128,19 @@
 		![](https://hackmd.io/_uploads/rJSMn2Wv3.png)
 ## Usage
 - 開啟虛擬機 
-	- 開啟 Nginx ( 確保 WordPress 正常運作 )
+	- 開啟 Nginx
+        ```cmd=
+        sudo service nginx start
+        ```
+    - 查看 Nginx 狀態確保 WordPress 正常運作
+    ![](https://hackmd.io/_uploads/ryCjKNuDh.png)
 	- 開啟 Flask Server
 	    ```cmd=
 		cd ./Flask
 		python3 main.py
 		```
 - 取得 HackMD API Token
-	> 利用 Token 免登入 HackMD 就可以取得所有共筆網址
+	> 利用 Token 免登入 HackMD 就可以取得所有共筆網址或是獲取私人筆記內容
 	- 創建自己的 HackMD API token
 		![](https://hackmd.io/_uploads/BJkMQuoHn.png)
 	- 幫自己的 token 取名字（隨便取XD）
@@ -143,8 +149,10 @@
 	![](https://hackmd.io/_uploads/BkpPPKPP3.png)
 - 顯示成功備份
 	![](https://hackmd.io/_uploads/HJUXuYDDh.png)
-- 就可以到 WordPress 查看 HackMD 內容
-<!-- How to use your project -->
+- 就可以到 WordPress 查看已備份的 HackMD 內容
+    ![](https://hackmd.io/_uploads/SkcOsEOw2.png)
+- HackMD 筆記內的圖片連結也會換成 WordPress 圖片連結
+
 ## 遇到的問題
 - 權限不足問題，無法新增修改檔案寫入 wordpress 檔案 
 	- 修該權限 為 `www-data` 讓 wordpress 有權限更改 : 
@@ -175,3 +183,4 @@
 - [How to create an HTTPS certificate for localhost domains](https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8)
 - [HackMD API](https://hackmd.io/@hackmd-api/developer-portal/https%3A%2F%2Fhackmd.io%2F%40hackmd-api%2Fuser-notes-api)
 - [Wordpress API : XML-RPC](https://python-wordpress-xmlrpc.readthedocs.io/en/latest/ref/methods.html#wordpress_xmlrpc.methods.media.GetMediaLibrary)
+- [connect to wordpress](https://github.com/whuhan2013/pythoncode/blob/master/wordpress/wordpress.py)
